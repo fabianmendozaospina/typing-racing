@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"> 
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Fabian Mendoza">
+        <meta name="description" content="F1 Typing Race">
+        <meta name="keywords" content="web, html, css, javascript">
+        <title>F1 Typing Race</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"> 
+        <link rel="stylesheet" href="./assets/css/style.css" media="all">
+        <script src="./assets/js/index.js" defer></script>
+    </head>
+    <body>
+        <main>
+            <div class="center">
+                <div class="container-intro">
+                    <video autoplay playsinline muted loop>
+                        <source src="./assets/video/intro.mp4" type="video/mp4">
+                    </video>
+                    <div class="content-button">
+                        <button class="start">Play Now!</button>
+                    </div>
+                </div>
+                <div class="container-start">
+                    <audio class="intro-audio" autoplay loop>
+                        <source src="./assets/audio/start.mp3" type="audio/mp3">
+                    </audio>
+                    <video playsinline muted class="intro-video">
+                        <source src="./assets/video/start.mp4" type="video/mp4">
+                    </video>
+                    <div class="cockpit"></div>
+                    <div class="container-racing">
+                        <div class="container-racing-counter">
+                            <h1><i class="fa-solid fa-stopwatch"> <span class="counter racing-counter"></span></i></h1>
+                        </div>
+                        <div class="form-container">
+                            <div class="output-container"><p class="output"></p></div>
+                            <input type="text" class="input">
+                            <div class="container-hits"><p class="counter hits"></p></div>
+                            <button class="restart">Restart Game</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>            
+    </body>
+</html>
