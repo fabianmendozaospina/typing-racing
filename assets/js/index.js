@@ -1,6 +1,9 @@
 'use strict';
 
-const COUNTER = 99;
+import { select, listen } from "./utils.js";
+import data from "./data.js"
+
+const TOTAL_SECONDS = 99;
 const containerIntroObj = select('.container-intro');
 const containerStartObj = select('.container-start');
 const containerRacingObj = select('.container-racing');
@@ -9,62 +12,16 @@ const introVideoObj = select('.intro-video');
 const inputObj = select('.input');
 const outputObj = select('.output');
 const hitsObj = select('.hits');
-const formContainerObj = select('.form-container');
 const startObj = select('.start');
 const restartObj = select('.restart');
 const gameCounterObj = select('.racing-counter');
-const baseWord = [
-    'dinosaur', 'love', 'pineapple', 'calendar', 'robot', 'building',
-    'population', 'weather', 'bottle', 'history', 'dream', 'character', 'money',
-    'absolute', 'discipline', 'machine', 'accurate', 'connection', 'rainbow',
-    'bicycle', 'eclipse', 'calculator', 'trouble', 'watermelon', 'developer',
-    'philosophy', 'database', 'periodic', 'capitalism', 'abominable', 'phone',
-    'component', 'future', 'pasta', 'microwave', 'jungle', 'wallet', 'canada',
-    'velvet', 'potion', 'treasure', 'beacon', 'labyrinth', 'whisper', 'breeze',
-    'coffee', 'beauty', 'agency', 'chocolate', 'eleven', 'technology',
-    'alphabet', 'knowledge', 'magician', 'professor', 'triangle', 'earthquake',
-    'baseball', 'beyond', 'evolution', 'banana', 'perfume', 'computer',
-    'butterfly', 'discovery', 'ambition', 'music', 'eagle', 'crown',
-    'chess', 'laptop', 'bedroom', 'delivery', 'enemy', 'button', 'door', 'bird',
-    'superman', 'library', 'unboxing', 'bookstore', 'language', 'homework',
-    'beach', 'economy', 'interview', 'awesome', 'challenge', 'science',
-    'mystery', 'famous', 'league', 'memory', 'leather', 'planet', 'software',
-    'update', 'yellow', 'keyboard', 'window', 'beans', 'truck', 'sheep',
-    'blossom', 'secret', 'wonder', 'enchantment', 'destiny', 'quest', 'sanctuary',
-    'download', 'blue', 'actor', 'desk', 'watch', 'giraffe', 'brazil',
-    'audio', 'school', 'detective', 'hero', 'progress', 'winter', 'passion',
-    'rebel', 'amber', 'jacket', 'article', 'paradox', 'social', 'resort',
-    'mask', 'escape', 'promise', 'band', 'level', 'hope', 'moonlight', 'media',
-    'orchestra', 'volcano', 'guitar', 'raindrop', 'inspiration', 'diamond',
-    'illusion', 'firefly', 'ocean', 'cascade', 'journey', 'laughter', 'horizon',
-    'exploration', 'serendipity', 'infinity', 'silhouette', 'wanderlust',
-    'marvel', 'nostalgia', 'serenity', 'reflection', 'twilight', 'harmony',
-    'symphony', 'solitude', 'essence', 'melancholy', 'melody', 'vision',
-    'silence', 'whimsical', 'eternity', 'cathedral', 'embrace', 'poet', 'ricochet',
-    'mountain', 'dance', 'sunrise', 'dragon', 'adventure', 'galaxy', 'echo',
-    'fantasy', 'radiant', 'serene', 'legend', 'starlight', 'light', 'pressure',
-    'bread', 'cake', 'caramel', 'juice', 'mouse', 'charger', 'pillow', 'candle',
-    'film', 'jupiter'
-];
-
-const shuffleWords = [...baseWord];
-let wordsRightTyped = 0;
+let counterRightWords = 0;
+let currentIndexWord = 0;
 let wordToType = '';
 let intervalId = null;
+let wordBank = data;
 
-gameCounterObj.innerText = `${COUNTER}`;
-
-function listen(event, scope, callback) {
-    return scope.addEventListener(event, callback);
-}
-
-function select(scope, parent = document) {
-    return parent.querySelector(scope);
-}
-
-function getElement(scope, parent = document) {
-    return parent.getElementById(scope);
-}
+gameCounterObj.innerText = `${TOTAL_SECONDS}`;
 
 function play() {
     introVideoObj.pause();
@@ -76,8 +33,8 @@ function play() {
     containerRacingObj.style.visibility = 'hidden';
     containerStartObj.style.display = 'block';
 
-    shuffleWords.length = 0;
-    shuffleWords.push(...baseWord);
+    currentIndexWord = 0;
+    wordBank = getShuffleWords();
     inputObj.disabled = false;
     inputObj.value = '';
     outputObj.innerText = '';
@@ -102,8 +59,8 @@ function start() {
     inputObj.focus();
     inputObj.value = '';
 
-    let counter = COUNTER;
-    wordsRightTyped = 0;
+    let counter = TOTAL_SECONDS;
+    counterRightWords = 0;
     wordToType = showShuffleWord();
 
     intervalId = setInterval(() => {
@@ -119,25 +76,20 @@ function start() {
     }, 1000);
 }
 
-function getShuffleWord(array) {
-    //TODO: See the way to do it with the method toSorted();
-    let index = Math.floor(Math.random() * array.length);
-    return array[index];
+function getShuffleWords() {
+    return wordBank.toSorted(() => Math.random() - 0.5);
 }
 
 function showShuffleWord() {
-    const wordToShow = getShuffleWord(shuffleWords);
+    const wordToShow = wordBank[currentIndexWord];
     outputObj.innerText = wordToShow;
+
     return wordToShow;
 }
 
 function areWordsIquals(input, wordToType) {
     if (input.toLowerCase() === wordToType.toLowerCase()) {
-        const index = shuffleWords.findIndex(word => word.toLowerCase() === wordToType.toLowerCase());
-
-        if (index !== -1) {
-            shuffleWords.splice(index, 1);
-        }
+        currentIndexWord++;
 
         inputObj.value = '';
 
@@ -164,10 +116,10 @@ listen('input', inputObj, () => {
     const input = inputObj.value.trim();
 
     if (areWordsIquals(input, wordToType)) {
-        wordsRightTyped++;
-        hitsObj.innerText = `Hits: ${formatCounter(wordsRightTyped)}`;
+        counterRightWords++;
+        hitsObj.innerText = `Hits: ${formatCounter(counterRightWords)}`;
 
-        if (shuffleWords.length > 0) {
+        if (currentIndexWord < wordBank.length) {
             wordToType = showShuffleWord();
 
         } else {
