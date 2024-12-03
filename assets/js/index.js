@@ -2,6 +2,7 @@
 
 import { select, listen } from "./utils.js";
 import data from "./data.js"
+import Score from "./Score.js";
 
 const TOTAL_SECONDS = 99;
 const containerIntroObj = select('.container-intro');
@@ -15,10 +16,11 @@ const hitsObj = select('.hits');
 const startObj = select('.start');
 const restartObj = select('.restart');
 const gameCounterObj = select('.racing-counter');
-let counterRightWords = 0;
+const scores = [];
+let hits = 0;
 let currentIndexWord = 0;
-let wordToType = '';
 let intervalId = null;
+let wordToType = '';
 let wordBank = data;
 
 gameCounterObj.innerText = `${TOTAL_SECONDS}`;
@@ -31,10 +33,11 @@ function play() {
 
     containerIntroObj.style.display = 'none';
     containerRacingObj.style.visibility = 'hidden';
+    inputObj.style.visibility = 'hidden';
     containerStartObj.style.display = 'block';
 
     currentIndexWord = 0;
-    wordBank = getShuffleWords();
+    wordBank = shuffleWords();
     inputObj.disabled = false;
     inputObj.value = '';
     outputObj.innerText = '';
@@ -60,8 +63,8 @@ function start() {
     inputObj.value = '';
 
     let counter = TOTAL_SECONDS;
-    counterRightWords = 0;
-    wordToType = showShuffleWord();
+    hits = 0;
+    wordToType = getShuffledWord();
 
     intervalId = setInterval(() => {
         if (counter > 0) {
@@ -76,11 +79,21 @@ function start() {
     }, 1000);
 }
 
-function getShuffleWords() {
+function stop() {
+    createScore();
+    clearInterval(intervalId);
+    inputObj.style.visibility = 'hidden';
+    introVideoObj.pause();
+    introAudioObj.pause();
+    introVideoObj.currentTime = 0;                    
+    introAudioObj.currentTime = 0;
+}
+
+function shuffleWords() {
     return wordBank.toSorted(() => Math.random() - 0.5);
 }
 
-function showShuffleWord() {
+function getShuffledWord() {
     const wordToShow = wordBank[currentIndexWord];
     outputObj.innerText = wordToShow;
 
@@ -90,7 +103,6 @@ function showShuffleWord() {
 function areWordsIquals(input, wordToType) {
     if (input.toLowerCase() === wordToType.toLowerCase()) {
         currentIndexWord++;
-
         inputObj.value = '';
 
         return true;
@@ -99,13 +111,10 @@ function areWordsIquals(input, wordToType) {
     return false;
 }
 
-function stop() {
-    clearInterval(intervalId);
-    inputObj.style.visibility = 'hidden';
-    introVideoObj.pause();
-    introAudioObj.pause();
-    introVideoObj.currentTime = 0;                    
-    introAudioObj.currentTime = 0;
+function createScore() {
+    const date = new Date();
+    const percentage = 0;
+    scores.push(new Score(date, hits, percentage));    
 }
 
 function formatCounter(counter) {
@@ -116,11 +125,11 @@ listen('input', inputObj, () => {
     const input = inputObj.value.trim();
 
     if (areWordsIquals(input, wordToType)) {
-        counterRightWords++;
-        hitsObj.innerText = `Hits: ${formatCounter(counterRightWords)}`;
+        hits++;
+        hitsObj.innerText = `Hits: ${formatCounter(hits)}`;
 
         if (currentIndexWord < wordBank.length) {
-            wordToType = showShuffleWord();
+            wordToType = getShuffledWord();
 
         } else {
             outputObj.innerText = 'Congrats!!';
