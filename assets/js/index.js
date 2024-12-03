@@ -25,15 +25,13 @@ let wordBank = data;
 
 gameCounterObj.innerText = `${TOTAL_SECONDS}`;
 
-function play() {
-    introVideoObj.pause();
-    introAudioObj.pause();
-    introVideoObj.currentTime = 0;    
-    introAudioObj.currentTime = 0;    
+function intro() {
+    stop();
+    containerIntroObj.style.display = 'block';
+}
 
-    containerIntroObj.style.display = 'none';
-    containerRacingObj.style.visibility = 'hidden';
-    inputObj.style.visibility = 'hidden';
+function play() {
+    stop();
     containerStartObj.style.display = 'block';
 
     currentIndexWord = 0;
@@ -49,7 +47,6 @@ function play() {
     }, 1000);
 
     setTimeout(() => {    
-        clearInterval(intervalId);
         containerIntroObj.style.display = 'none';
         containerRacingObj.style.visibility = 'visible';
         start();        
@@ -75,18 +72,22 @@ function start() {
         if (counter === 0) {
             outputObj.innerText = 'Game Over!';
             stop();
+            createScore();
         }
     }, 1000);
 }
 
 function stop() {
-    createScore();
     clearInterval(intervalId);
-    inputObj.style.visibility = 'hidden';
+
     introVideoObj.pause();
     introAudioObj.pause();
-    introVideoObj.currentTime = 0;                    
-    introAudioObj.currentTime = 0;
+    introVideoObj.currentTime = 0;    
+    introAudioObj.currentTime = 0;    
+
+    containerIntroObj.style.display = 'none';
+    containerRacingObj.style.visibility = 'hidden';
+    inputObj.style.visibility = 'hidden';
 }
 
 function shuffleWords() {
@@ -126,7 +127,7 @@ listen('input', inputObj, () => {
 
     if (areWordsIquals(input, wordToType)) {
         hits++;
-        hitsObj.innerText = `Hits: ${formatCounter(hits)}`;
+        hitsObj.innerText = `Hits: ${formatCounter(hits)}\nPerc: 0%\n` ;
 
         if (currentIndexWord < wordBank.length) {
             wordToType = getShuffledWord();
@@ -134,6 +135,7 @@ listen('input', inputObj, () => {
         } else {
             outputObj.innerText = 'Congrats!!';
             stop();
+            createScore();
         }
     }
 });
@@ -143,3 +145,4 @@ listen('click', startObj, play);
 
 listen('click', restartObj, play);
 
+intro();
