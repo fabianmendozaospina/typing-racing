@@ -4,7 +4,7 @@ import { select, listen } from "./utils.js";
 import data from "./data.js"
 import Score from "./Score.js";
 
-const TOTAL_SECONDS = 900;
+const TOTAL_SECONDS = 99;
 const containerIntroObj = select('.container-intro');
 const containerGameObj = select('.container-game');
 const gameControlsObj = select('.game-controls');
@@ -157,7 +157,7 @@ listen('ended', gameVideoObj, () => {
 });
 
 listen('ended', gameAudioObj, () => {
-    gameAudioObj.currentTime = 5;
+    gameAudioObj.currentTime = 4;
     gameAudioObj.play();
 });
 
