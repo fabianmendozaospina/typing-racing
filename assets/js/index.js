@@ -24,8 +24,6 @@ let wordToTypeIndex = 0;
 let intervalId = null;
 let hits = 0;
 
-gameCounterObj.innerText = `${TOTAL_SECONDS}`;
-
 function intro() {
     stop();
     containerIntroObj.style.display = 'block';
@@ -57,6 +55,7 @@ function start() {
     inputObj.style.visibility = 'visible';
     inputObj.focus();
     inputObj.value = '';
+    gameCounterObj.innerText = `${TOTAL_SECONDS}`;
 
     let counter = TOTAL_SECONDS;
     hits = 0;
