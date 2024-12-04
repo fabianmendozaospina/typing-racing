@@ -6,10 +6,10 @@ import Score from "./Score.js";
 
 const TOTAL_SECONDS = 99;
 const containerIntroObj = select('.container-intro');
-const containerStartObj = select('.container-start');
-const containerRacingObj = select('.container-racing');
-const introAudioObj = select('.intro-audio');
-const introVideoObj = select('.intro-video');
+const containerGameObj = select('.container-game');
+const gameControlsObj = select('.game-controls');
+const gameAudioObj = select('.game-audio');
+const gameVideoObj = select('.game-video');
 const inputObj = select('.input');
 const outputObj = select('.output');
 const hitsObj = select('.hits');
@@ -17,11 +17,12 @@ const startObj = select('.start');
 const restartObj = select('.restart');
 const gameCounterObj = select('.racing-counter');
 const scores = [];
-let hits = 0;
-let currentIndexWord = 0;
-let intervalId = null;
-let wordToType = '';
+
 let wordBank = data;
+let wordToType = '';
+let indexWordToType = 0;
+let hits = 0;
+let intervalId = null;
 
 gameCounterObj.innerText = `${TOTAL_SECONDS}`;
 
@@ -32,9 +33,7 @@ function intro() {
 
 function play() {
     stop();
-    containerStartObj.style.display = 'block';
-
-    currentIndexWord = 0;
+    indexWordToType = 0;
     wordBank = shuffleWords();
     inputObj.disabled = false;
     inputObj.value = '';
@@ -42,13 +41,13 @@ function play() {
     hitsObj.innerText = '';
 
     setTimeout(() => {
-        introVideoObj.play();
-        introAudioObj.play(); 
+        gameVideoObj.play();
+        gameAudioObj.play(); 
     }, 1000);
 
     setTimeout(() => {    
         containerIntroObj.style.display = 'none';
-        containerRacingObj.style.visibility = 'visible';
+        gameControlsObj.style.visibility = 'visible';
         start();        
 
     }, 4100);  
@@ -60,6 +59,7 @@ function start() {
     inputObj.value = '';
 
     let counter = TOTAL_SECONDS;
+    let second = 0;
     hits = 0;
     wordToType = getShuffledWord();
 
@@ -71,23 +71,29 @@ function start() {
 
         if (counter === 0) {
             outputObj.innerText = 'Game Over!';
-            stop();
+            stop(false);
             createScore();
         }
+
+        if (second === 100) {
+            gameVideoObj.currentTime = 10; 
+        }
+        second++;
     }, 1000);
 }
 
-function stop() {
+function stop(hideOutput = true) {
     clearInterval(intervalId);
 
-    introVideoObj.pause();
-    introAudioObj.pause();
-    introVideoObj.currentTime = 0;    
-    introAudioObj.currentTime = 0;    
+    gameVideoObj.pause();
+    gameAudioObj.pause();
+    gameVideoObj.currentTime = 0;    
+    gameAudioObj.currentTime = 0;    
 
     containerIntroObj.style.display = 'none';
-    containerRacingObj.style.visibility = 'hidden';
+    if (hideOutput) gameControlsObj.style.visibility = 'hidden';
     inputObj.style.visibility = 'hidden';
+    containerGameObj.style.display = 'block';
 }
 
 function shuffleWords() {
@@ -95,7 +101,7 @@ function shuffleWords() {
 }
 
 function getShuffledWord() {
-    const wordToShow = wordBank[currentIndexWord];
+    const wordToShow = wordBank[indexWordToType];
     outputObj.innerText = wordToShow;
 
     return wordToShow;
@@ -103,7 +109,7 @@ function getShuffledWord() {
 
 function areWordsIquals(input, wordToType) {
     if (input.toLowerCase() === wordToType.toLowerCase()) {
-        currentIndexWord++;
+        indexWordToType++;
         inputObj.value = '';
 
         return true;
@@ -129,20 +135,24 @@ listen('input', inputObj, () => {
         hits++;
         hitsObj.innerText = `Hits: ${formatCounter(hits)}\nPerc: 0%\n` ;
 
-        if (currentIndexWord < wordBank.length) {
+        if (indexWordToType < wordBank.length) {
             wordToType = getShuffledWord();
 
         } else {
             outputObj.innerText = 'Congrats!!';
-            stop();
+            stop(false);
             createScore();
         }
     }
 });
 
-
 listen('click', startObj, play);
 
 listen('click', restartObj, play);
+
+listen('ended', gameVideoObj, () => {
+    console.log("**** REINICIA VIDEO");
+    gameVideoObj.currentTime = 10;
+});
 
 intro();

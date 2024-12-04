@@ -67,13 +67,101 @@ a {
     color: var(--app-dark-gray)
 }
 
+.center {
+    text-align: center;
+}
+
+video {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+}
+
 
 /* ------------------------*/
 /*           Intro         */
 /* ------------------------*/
 
-.center {
+.container-intro {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content-logo {
+    position: absolute;
     text-align: center;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.logo {
+    width: 630px;
+    height: 630px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 25px;
+    border-radius: 50%;
+
+    h1 {
+        text-transform: uppercase;
+        font-style: italic;
+        opacity: 0.9;
+        font-size: 46px;
+        line-height: 25px;
+        margin-top: 25px;
+    }
+
+    img {
+        position: relative;
+        left: -100px;
+        top: -30px;
+        width: 800px;
+        height: auto;
+    }
+}
+
+.racing {
+    color: rgba(250, 6, 6, 0.9);
+}
+
+.start {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; 
+    font-size: 20px;
+    font-weight: 500;
+    background-color: rgba(255, 6, 6, 0.5); 
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: -30px; 
+}
+
+.start:hover {
+    background-color:  rgba(250, 6, 6, 0.9);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
+}
+
+.start:active {
+    transform: scale(0.95); 
+    box-shadow: none; 
+}
+
+
+/* ------------------------*/
+/*           Game          */
+/* ------------------------*/
+
+.container-game {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .cockpit {
@@ -89,91 +177,13 @@ a {
     height: 100%;
 }
 
-.container-intro {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.container-start {
-    display: none;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.container-racing {
+.game-controls {
     visibility: hidden;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-}
-
-video {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover;
-}
-
-.content-logo {
-    position: absolute;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-}
-
-.background-logo {
-    width: 440px;
-    height: fit-content;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 25px;
-    line-height: 1.5;
-    border-radius: 10px;
-
-    h1 {
-        text-transform: uppercase;
-        font-style: italic;
-        opacity: 0.9;
-        font-size: 46px;;
-    }
-
-    img {
-        position: relative;
-        left: -180px;
-        top: 5px;
-        width: 800px;
-        height: auto;
-    }
-}
-
-.start {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%; 
-    font-size: 20px;
-    font-weight: 500;
-    background-color: rgba(255, 6, 6, 0.5); 
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 20px;
-}
-
-.start:hover {
-    background-color:  rgba(250, 6, 6, 0.9);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
-}
-
-.start:active {
-    transform: scale(0.95); 
-    box-shadow: none; 
 }
 
 .restart {
@@ -200,8 +210,8 @@ video {
     box-shadow: none; 
 }
 
-.form-container {
-    display: inline-block;
+.control-panel {
+    /* display: inline-block; */
     width: 650px;
     border-radius: 5px;
     padding: 15px;
@@ -272,7 +282,7 @@ input[type="text"]::placeholder {
     top: -30px; 
 }
 
-.container-hits {
+.hits-container {
     height: 30px;
     width: 100%;
 

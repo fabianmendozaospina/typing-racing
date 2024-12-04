@@ -1,5 +1,5 @@
 'use strict';
-
+// const wordBank = ['test1','test2'];
 const wordBank =
     [
         'dinosaur', 'love', 'pineapple', 'calendar', 'robot', 'building',

@@ -23,29 +23,30 @@
                         <source src="./assets/video/intro.mp4" type="video/mp4">
                     </video>
                     <div class="content-logo">
-                        <div class="background-logo">
-                            <h1>Typing Racing</h1>
+                        <div class="logo">
+                            <h1>Typing</h1>
+                            <h1 class="racing">Racing</h1>
                             <img src="./assets/img/f1-car.png">
                             <button class="start">Play</button>
                         </div>
                     </div>
                 </div>
-                <div class="container-start">
-                    <audio class="intro-audio" autoplay loop>
-                        <source src="./assets/audio/start.mp3" type="audio/mp3">
+                <div class="container-game">
+                    <audio class="game-audio" autoplay loop>
+                        <source src="./assets/audio/game.mp3" type="audio/mp3">
                     </audio>
-                    <video playsinline muted class="intro-video">
-                        <source src="./assets/video/start.mp4" type="video/mp4">
+                    <video playsinline muted class="game-video">
+                        <source src="./assets/video/game.mp4" type="video/mp4">
                     </video>
                     <div class="cockpit"></div>
-                    <div class="container-racing">
-                        <div class="container-racing-counter">
+                    <div class="game-controls">
+                        <div>
                             <h1><i class="fa-solid fa-stopwatch"> <span class="counter racing-counter"></span></i></h1>
                         </div>
-                        <div class="form-container">
+                        <div class="control-panel">
                             <div class="output-container"><p class="output"></p></div>
-                            <input type="text" class="input">
-                            <div class="container-hits"><p class="counter hits"></p></div>
+                            <input class="input" type="text">
+                            <div class="hits-container"><p class="counter hits"></p></div>
                             <button class="restart">Restart</button>
                         </div>
                     </div>
