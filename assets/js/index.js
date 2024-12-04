@@ -4,7 +4,7 @@ import { select, listen } from "./utils.js";
 import data from "./data.js"
 import Score from "./Score.js";
 
-const TOTAL_SECONDS = 99;
+const TOTAL_SECONDS = 900;
 const containerIntroObj = select('.container-intro');
 const containerGameObj = select('.container-game');
 const gameControlsObj = select('.game-controls');
@@ -20,9 +20,9 @@ const scores = [];
 
 let wordBank = data;
 let wordToType = '';
-let indexWordToType = 0;
-let hits = 0;
+let wordToTypeIndex = 0;
 let intervalId = null;
+let hits = 0;
 
 gameCounterObj.innerText = `${TOTAL_SECONDS}`;
 
@@ -33,7 +33,7 @@ function intro() {
 
 function play() {
     stop();
-    indexWordToType = 0;
+    wordToTypeIndex = 0;
     wordBank = shuffleWords();
     inputObj.disabled = false;
     inputObj.value = '';
@@ -59,9 +59,8 @@ function start() {
     inputObj.value = '';
 
     let counter = TOTAL_SECONDS;
-    let second = 0;
     hits = 0;
-    wordToType = getShuffledWord();
+    wordToType = getWordToType();
 
     intervalId = setInterval(() => {
         if (counter > 0) {
@@ -74,11 +73,6 @@ function start() {
             stop(false);
             createScore();
         }
-
-        if (second === 100) {
-            gameVideoObj.currentTime = 10; 
-        }
-        second++;
     }, 1000);
 }
 
@@ -100,8 +94,15 @@ function shuffleWords() {
     return wordBank.toSorted(() => Math.random() - 0.5);
 }
 
-function getShuffledWord() {
-    const wordToShow = wordBank[indexWordToType];
+function getWordToType() {
+    const wordToShow = wordBank[wordToTypeIndex];
+
+    if (wordToShow.length > 9)  {
+        outputObj.style.fontSize = '75px';
+    } else {
+        outputObj.style.fontSize = '90px';
+    }
+
     outputObj.innerText = wordToShow;
 
     return wordToShow;
@@ -109,7 +110,7 @@ function getShuffledWord() {
 
 function areWordsIquals(input, wordToType) {
     if (input.toLowerCase() === wordToType.toLowerCase()) {
-        indexWordToType++;
+        wordToTypeIndex++;
         inputObj.value = '';
 
         return true;
@@ -135,8 +136,8 @@ listen('input', inputObj, () => {
         hits++;
         hitsObj.innerText = `Hits: ${formatCounter(hits)}\nPerc: 0%\n` ;
 
-        if (indexWordToType < wordBank.length) {
-            wordToType = getShuffledWord();
+        if (wordToTypeIndex < wordBank.length) {
+            wordToType = getWordToType();
 
         } else {
             outputObj.innerText = 'Congrats!!';
@@ -151,8 +152,13 @@ listen('click', startObj, play);
 listen('click', restartObj, play);
 
 listen('ended', gameVideoObj, () => {
-    console.log("**** REINICIA VIDEO");
     gameVideoObj.currentTime = 10;
+    gameVideoObj.play();
+});
+
+listen('ended', gameAudioObj, () => {
+    gameAudioObj.currentTime = 5;
+    gameAudioObj.play();
 });
 
 intro();
