@@ -109,27 +109,68 @@ video {
         font-style: italic;
         opacity: 0.9;
         font-size: 46px;
-        line-height: 25px;
-        margin-top: 25px;
-        background: linear-gradient(45deg, #ff4500, #ff6347, #8b0000);
+        line-height: 35px;
         background-clip: text;
-        -webkit-background-clip: text;
         text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.5);
-    }
+        color: transparent;
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;          
+    }    
 
     img {
         position: relative;
         left: -100px;
-        top: -30px;
+        top: 0px;
         width: 800px;
         height: auto;
     }
 }
 
-.racing {
-    color: rgba(250, 6, 6, 0.9);
+.typing {
+    margin-top: 25px;
+    display: inline-block;
+    overflow: hidden; 
+    width: 0; 
+    background: linear-gradient(45deg, #f5f4f3, #f1d1cc, #f9dede);  
+    animation: typing 1.4s steps(33) 0.2s forwards, step-end infinite;
+    margin-bottom: 0;
 }
 
+@keyframes typing {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+}
+
+.racing {
+    margin-top: 0;
+    position: absolute;
+    animation: move 0.6s linear forwards; 
+    background: linear-gradient(45deg, #ff4500, rgba(250, 6, 6, 0.9), rgba(250, 6, 6, 0.9));  
+}
+
+@keyframes stripe {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+}
+
+@keyframes move {
+    from {
+        left: 11%;
+    }
+    to {
+        left: 35%;
+    }
+}
+  
 .start {
     width: 70px;
     height: 70px;
@@ -141,7 +182,6 @@ video {
     border: none;
     cursor: pointer;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    margin-top: -30px; 
 }
 
 .start:hover {
