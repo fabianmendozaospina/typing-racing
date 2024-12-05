@@ -173,17 +173,18 @@ video {
 }
 
 .info, .score {
-    font-size: 26px;
     cursor: pointer;
     margin-top: 20px;
     color: var(--app-light-gray);
 }
 
 .info {
+    font-size: 26px;
     margin-right: 15px;
 }
   
 .score {
+    font-size: 22px;
     margin-left: 15px;
 }
 
@@ -406,8 +407,8 @@ input[type="text"]::placeholder {
 
   .modal {
     background-color: rgba(0, 0, 0, 0.99);
-    width: 70px;
-    height: 70px;
+    width: 62px;
+    height: 62px;
     border-radius: 50%;
     display: flex;
     justify-content: center;

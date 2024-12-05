@@ -6,6 +6,14 @@ const infoBtn = select('.info');
 const modalOverlay = select('.modal-overlay');
 const modal = select('.modal');
 const logo = select('.logo');
+const infoGame = select('.info-game');
+
+const closeModal = () => {
+    modalOverlay.classList.remove('active');
+    modal.classList.remove('active');
+    logo.style.visibility = 'visible';
+    infoGame.pause();
+};
 
 listen('click', infoBtn, () => {
     modalOverlay.classList.add('active');
@@ -13,6 +21,8 @@ listen('click', infoBtn, () => {
     setTimeout(() => {
         logo.style.visibility = 'hidden';
     }, 300)
+    infoGame.currentTime = 0;
+    infoGame.play();
 });
 
 listen('keydown', document, (event) => {
@@ -26,9 +36,3 @@ listen('click', modalOverlay, (event) => {
         closeModal();
     }
 });
-
-const closeModal = () => {
-    modalOverlay.classList.remove('active');
-    modal.classList.remove('active');
-    logo.style.visibility = 'visible';
-};

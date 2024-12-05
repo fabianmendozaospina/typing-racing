@@ -1,7 +1,7 @@
 'use strict';
 
 import { select, listen } from "./utils.js";
-import data from "./data.js"
+import data from "../data/word-bank.js";
 import Score from "./Score.js";
 
 const TOTAL_SECONDS = 99;
@@ -23,38 +23,6 @@ let wordToType = '';
 let wordToTypeIndex = 0;
 let intervalId = null;
 let hits = 0;
-
-listen('input', inputObj, () => {
-    const input = inputObj.value.trim();
-
-    if (areWordsIquals(input, wordToType)) {
-        hits++;
-        hitsObj.innerText = `Hits: ${formatCounter(hits)}\nPerc: 0%\n` ;
-
-        if (wordToTypeIndex < wordBank.length) {
-            wordToType = getWordToType();
-
-        } else {
-            outputObj.innerText = 'Congrats!!';
-            stop(false);
-            createScore();
-        }
-    }
-});
-
-listen('click', startObj, play);
-
-listen('click', restartObj, play);
-
-listen('ended', gameVideoObj, () => {
-    gameVideoObj.currentTime = 10;
-    gameVideoObj.play();
-});
-
-listen('ended', gameAudioObj, () => {
-    gameAudioObj.currentTime = 4;
-    gameAudioObj.play();
-});
 
 intro();
 
@@ -161,3 +129,35 @@ function createScore() {
 function formatCounter(counter) {
     return (counter < 10 ? '0' : '') + `${counter}`;
 }
+
+listen('input', inputObj, () => {
+    const input = inputObj.value.trim();
+
+    if (areWordsIquals(input, wordToType)) {
+        hits++;
+        hitsObj.innerText = `Hits: ${formatCounter(hits)}\nPerc: 0%\n` ;
+
+        if (wordToTypeIndex < wordBank.length) {
+            wordToType = getWordToType();
+
+        } else {
+            outputObj.innerText = 'Congrats!!';
+            stop(false);
+            createScore();
+        }
+    }
+});
+
+listen('click', startObj, play);
+
+listen('click', restartObj, play);
+
+listen('ended', gameVideoObj, () => {
+    gameVideoObj.currentTime = 10;
+    gameVideoObj.play();
+});
+
+listen('ended', gameAudioObj, () => {
+    gameAudioObj.currentTime = 4;
+    gameAudioObj.play();
+});
