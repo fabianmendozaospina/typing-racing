@@ -23,6 +23,8 @@ let wordToType = '';
 let wordToTypeIndex = 0;
 let intervalId = null;
 let hits = 0;
+let letterElements = [];
+let animatedLetters = [];
 
 intro();
 
@@ -96,17 +98,25 @@ function shuffleWords() {
 }
 
 function getWordToType() {
-    const wordToShow = wordBank[wordToTypeIndex];
+    letterElements = [];
+    animatedLetters = [];
 
-    if (wordToShow.length > 9)  {
+    const wordToType = wordBank[wordToTypeIndex];
+
+    if (wordToType.length > 9)  {
         outputObj.style.fontSize = '77px';
     } else {
         outputObj.style.fontSize = '90px';
     }
 
-    outputObj.innerText = wordToShow;
+    //BEFORE: outputObj.innerText = wordToType;
+    outputObj.innerHTML =  [...wordToType]
+    .map(letter => `<span class="letter">${letter}</span>`)
+    .join('');
 
-    return wordToShow;
+    letterElements = document.querySelectorAll('.letter');
+
+    return wordToType;
 }
 
 function areWordsIquals(input, wordToType) {
@@ -130,8 +140,23 @@ function formatCounter(counter) {
     return (counter < 10 ? '0' : '') + `${counter}`;
 }
 
+function applyEffect(index, input, wordToType){
+    if (index >= 0 && input[index] === wordToType[index]) {
+        const letter = letterElements[index];
+
+        if (letter && !animatedLetters.includes(index)) {
+          letter.style.transform = 'translateX(-300px)';
+          letter.style.opacity = '0';
+          animatedLetters.push(index);
+        }
+    }  
+}
+
 listen('input', inputObj, () => {
     const input = inputObj.value.trim();
+    const index = input.length - 1;
+
+    applyEffect(index, input, wordToType);
 
     if (areWordsIquals(input, wordToType)) {
         hits++;

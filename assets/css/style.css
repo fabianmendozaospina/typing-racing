@@ -302,6 +302,12 @@ form {
     font-weight: 800;
     font-size: 90px;
     margin: 0;
+
+    /* font-size: 2rem; */
+    letter-spacing: 5px;
+    /* margin-bottom: 20px; */
+    white-space: nowrap;
+    overflow: hidden;    
 }
 
 .input-container {
@@ -460,3 +466,13 @@ input[type="text"]::placeholder {
         cursor: pointer;
     }
 }
+
+
+/* ------------------------*/
+/*       Effect Letters    */
+/* ------------------------*/
+
+.letter {
+    display: inline-block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
