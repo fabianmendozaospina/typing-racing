@@ -104,9 +104,9 @@ function getWordToType() {
     const wordToType = wordBank[wordToTypeIndex];
 
     if (wordToType.length > 9) {
-        outputObj.style.fontSize = '77px';
+        outputObj.style.fontSize = '75px';
     } else {
-        outputObj.style.fontSize = '90px';
+        outputObj.style.fontSize = '88px';
     }
 
     //BEFORE: outputObj.innerText = wordToType;
@@ -183,7 +183,7 @@ listen('click', startObj, play);
 listen('click', restartObj, play);
 
 listen('ended', gameVideoObj, () => {
-    gameVideoObj.currentTime = 10;
+    gameVideoObj.currentTime = 11;
     gameVideoObj.play();
 });
 
