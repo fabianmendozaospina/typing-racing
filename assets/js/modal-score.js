@@ -7,6 +7,7 @@ const modalOverlay = select('.modal-score-container');
 const modal = select('.modal-score');
 const logo = select('.logo');
 const scoreClose = select('.score-close');
+const scoreTable = select('.score-table');
 
 const closeModal = () => {
     modalOverlay.classList.remove('active');
@@ -20,6 +21,8 @@ listen('click', scoreOpen, () => {
 
     setTimeout(() => {
         logo.style.visibility = 'hidden';
+
+        scoreTable.innerHTML = '<table><tr><td>Hola</td></tr></table>'
     }, 300);
 });
 

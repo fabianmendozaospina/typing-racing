@@ -446,7 +446,7 @@ input[type="text"]::placeholder {
     opacity: 1;
 }
 
-.info-title {
+.info-title, .score-title {
     p {
         font-size: 4px;
         margin-top: 7px;
@@ -471,6 +471,10 @@ input[type="text"]::placeholder {
     }
 }
 
+.score-table {
+    height: 40px;
+    width: 40px;
+}
 
 /* ------------------------*/
 /*       Effect Letters    */
