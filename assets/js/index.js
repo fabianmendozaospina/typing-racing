@@ -163,7 +163,9 @@ listen('input', inputObj, () => {
 
     if (areWordsIquals(input, wordToType)) {
         hits++;
-        hitsObj.innerText = `Hits: ${formatCounter(hits)}\nPerc: 0%\n`;
+        console.log(" wordBank.length", wordBank.length)
+        const percentage = (hits * 100) / wordBank.length;
+        hitsObj.innerText = `${hits} hit${hits === 1 ? '' : 's'}\n${percentage}%\n`;
 
         if (wordToTypeIndex < wordBank.length) {
             wordToType = getWordToType();

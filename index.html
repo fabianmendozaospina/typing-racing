@@ -14,7 +14,8 @@
         <link rel="stylesheet" href="./assets/css/style.css" media="all">
         <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon">
         <script src="./assets/js/index.js" type="module"></script>
-        <script src="./assets/js/modal.js" type="module"></script>
+        <script src="./assets/js/modal-info.js" type="module"></script>
+        <script src="./assets/js/modal-score.js" type="module"></script>
     </head>
     <body>
         <main>
@@ -28,9 +29,9 @@
                             <h1 class="typing">Typing</h1>
                             <h1 class="racing">Racing</h1>
                             <img src="./assets/img/f1-car.png">
-                            <i class="info fa-regular fa-circle-question"></i>
+                            <i class="info-btn fa-regular fa-circle-question"></i>
                             <button class="start">Play</button>
-                            <i class="score fa-solid fa-trophy"></i>
+                            <i class="score-btn fa-solid fa-trophy"></i>
                         </div>
                     </div>
                 </div>
@@ -54,9 +55,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-overlay">
-                    <div class="modal">
-                        <div class="modal-content">
+                <div class="modal-info-container">
+                    <div class="modal-info">
+                        <div class="modal-info-content">
                             <div class="info-title"><p>Instructions</p></div>
                             <div>
                                 <video playsinline loop muted class="info-video">
@@ -66,7 +67,20 @@
                             <div class="info-close"><i class="fa-regular fa-circle-xmark"></i></div>
                         </div>
                     </div>
-                </div>                
+                </div>
+                <div class="modal-score-container">
+                    <div class="modal-score">
+                        <div class="modal-score-content">
+                            <div class="info-title"><p>Instructions</p></div>
+                            <div>
+                                <video playsinline loop muted class="info-video">
+                                    <source src="./assets/video/info.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="info-close"><i class="fa-regular fa-circle-xmark"></i></div>
+                        </div>
+                    </div>
+                </div>                           
             </div>
         </main>            
     </body>

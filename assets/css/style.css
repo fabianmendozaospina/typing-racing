@@ -172,23 +172,23 @@ video {
     }
 }
 
-.info, .score {
+.info-btn, .score-btn {
     cursor: pointer;
     margin-top: 20px;
     color: var(--app-light-gray);
 }
 
-.info {
+.info-btn {
     font-size: 26px;
     margin-right: 15px;
 }
   
-.score {
+.score-btn {
     font-size: 22px;
     margin-left: 15px;
 }
 
-.info:hover, .score:hover {
+.info-btn:hover, .score-btn:hover {
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     transform: scale(1.2);
     color: var(--app-white);
@@ -370,7 +370,7 @@ input[type="text"]::placeholder {
 /*          Modal          */
 /* ------------------------*/
 
-.open-modal-btn {
+/* .open-modal-info-btn {
     padding: 10px 20px;
     background-color: #ff4500;
     border: none;
@@ -381,11 +381,11 @@ input[type="text"]::placeholder {
     transition: background-color 0.3s ease;
 }
 
- .open-modal-btn:hover {
+ .open-modal-info-btn:hover {
     background-color: #ff6347;
- }
+ } */
 
- .modal-overlay {
+ .modal-info-container, .modal-score-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -406,12 +406,12 @@ input[type="text"]::placeholder {
     }    
 }
 
-.modal-overlay.active {
+.modal-info-container.active, .modal-score-container.active {
     opacity: 1;
     visibility: visible;
 }
 
-.modal {
+.modal-info, .modal-score {
     background-color: rgba(0, 0, 0, 0.99);
     width: 62px;
     height: 62px;
@@ -423,11 +423,11 @@ input[type="text"]::placeholder {
     transition: transform 0.4s ease-in-out;
 }
 
-.modal.active {
+.modal-info.active, .modal-score.active {
     transform: scale(10); 
 }
 
-.modal-content {
+.modal-info-content, .modal-score-content {
     text-align: center;
     color: #fff;
     opacity: 0;
@@ -438,7 +438,11 @@ input[type="text"]::placeholder {
     }
 }
 
-.modal.active .modal-content {
+.modal-info.active .modal-info-content {
+    opacity: 1;
+}
+
+.modal-score.active .modal-score-content {
     opacity: 1;
 }
 
