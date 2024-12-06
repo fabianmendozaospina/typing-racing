@@ -2,12 +2,12 @@
 
 import { select, listen } from "./utils.js";
 
-const infoBtn = select('.info-btn');
+const infoOpen = select('.info-open');
 const infoVideo = select('.info-video');
 const modalOverlay = select('.modal-info-container');
 const modal = select('.modal-info');
 const logo = select('.logo');
-const closeBtn = select('.info-close');
+const infoClose = select('.info-close');
 
 const closeModal = () => {
     modalOverlay.classList.remove('active');
@@ -16,7 +16,7 @@ const closeModal = () => {
     infoVideo.pause();
 };
 
-listen('click', infoBtn, () => {
+listen('click', infoOpen, () => {
     modalOverlay.classList.add('active');
     modal.classList.add('active');
 
@@ -28,7 +28,7 @@ listen('click', infoBtn, () => {
     infoVideo.play();
 });
 
-listen('click', closeBtn, () => {
+listen('click', infoClose, () => {
     closeModal();
 });
 

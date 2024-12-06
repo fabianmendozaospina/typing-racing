@@ -172,23 +172,23 @@ video {
     }
 }
 
-.info-btn, .score-btn {
+.info-open, .score-open {
     cursor: pointer;
     margin-top: 20px;
     color: var(--app-light-gray);
 }
 
-.info-btn {
+.info-open {
     font-size: 26px;
     margin-right: 15px;
 }
   
-.score-btn {
+.score-open {
     font-size: 22px;
     margin-left: 15px;
 }
 
-.info-btn:hover, .score-btn:hover {
+.info-open:hover, .score-open:hover {
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     transform: scale(1.2);
     color: var(--app-white);
@@ -370,7 +370,7 @@ input[type="text"]::placeholder {
 /*          Modal          */
 /* ------------------------*/
 
-/* .open-modal-info-btn {
+/* .open-modal-info-open {
     padding: 10px 20px;
     background-color: #ff4500;
     border: none;
@@ -381,7 +381,7 @@ input[type="text"]::placeholder {
     transition: background-color 0.3s ease;
 }
 
- .open-modal-info-btn:hover {
+ .open-modal-info-open:hover {
     background-color: #ff6347;
  } */
 
@@ -453,7 +453,7 @@ input[type="text"]::placeholder {
     }
 }
 
-.info-close {
+.info-close, .score-close {
     margin-top: -13px;
 
     i {
@@ -462,7 +462,7 @@ input[type="text"]::placeholder {
     }
 }
 
-.info-close {
+.info-close, .score-close {
     i:hover {
         transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         transform: scale(1.2);
