@@ -2,8 +2,7 @@
 
 import { select, listen, formatCounter } from "./utils.js";
 import data from "../data/word-bank.js";
-import { openModal, closeModal, existScores, 
-         getScores, saveScore } from "./modal-score.js";
+import { saveScore } from "./modal-score.js";
 
 const TOTAL_SECONDS = 15;
 const containerIntroObj = select('.container-intro');
@@ -17,6 +16,8 @@ const hitsObj = select('.hits');
 const startObj = select('.start');
 const restartObj = select('.restart');
 const gameCounterObj = select('.racing-counter');
+const gameInfoOpen = select('.game-info-open');
+const gameScoreOpen = select('.game-score-open');
 
 let wordBank = data;
 let wordToType = '';
@@ -41,6 +42,7 @@ function play() {
     inputObj.value = '';
     outputObj.innerText = '';
     hitsObj.innerText = '';
+    disableButtons(true);
 
     setTimeout(() => {
         gameVideoObj.play();
@@ -75,6 +77,7 @@ function start() {
             outputObj.innerText = 'Game Over!';
             stop(false);
             saveScore(hits);
+            disableButtons(false);
         }
     }, 1000);
 }
@@ -88,7 +91,6 @@ function stop(hideOutput = true) {
     gameAudioObj.currentTime = 0;
 
     containerIntroObj.style.display = 'none';
-    //OJO if (hideOutput) 
     gameControlsObj.style.visibility = hideOutput ? 'hidden' : 'none';
     inputObj.style.visibility = 'hidden';
     containerGameObj.style.display = 'block';
@@ -146,6 +148,16 @@ function applyEffect(input, wordToType) {
     }
 }
 
+function disableButtons(disable) {
+    if (disable) {
+        gameInfoOpen.classList.add('i-disabled');
+        gameScoreOpen.classList.add('i-disabled');
+    } else {
+        gameInfoOpen.classList.remove('i-disabled');
+        gameScoreOpen.classList.remove('i-disabled');
+    }
+}
+
 listen('input', inputObj, () => {
     const input = inputObj.value.trim();
 
@@ -163,6 +175,7 @@ listen('input', inputObj, () => {
             outputObj.innerText = 'Congrats!!';
             stop(false);
             saveScore(hits);
+            disableButtons(false);
         }
     }
 });

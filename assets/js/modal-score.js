@@ -11,11 +11,12 @@ const modal = select('.modal-score');
 const logo = select('.logo');
 const scoreClose = select('.score-close');
 const scoreTable = select('.score-table');
+const gameScoreOpen = select('.game-score-open');
 const rootStyles = getComputedStyle(document.documentElement);
 const mainFont = rootStyles.getPropertyValue('--app-main-font').trim();
 const monospaceFont = rootStyles.getPropertyValue('--app-monospace-font').trim();
 
-export function openModal() {
+function openModal() {
     modalOverlay.classList.add('active');
     modal.classList.add('active');
 
@@ -25,17 +26,17 @@ export function openModal() {
     }, 300);
 }
 
-export function closeModal() {
+function closeModal() {
     modalOverlay.classList.remove('active');
     modal.classList.remove('active');
     logo.style.visibility = 'visible';
 };
 
-export function existScores() {
+function existScores() {
     return localStorage.length > 0 && LS_SCORES in localStorage;
 }
 
-export function getScores() {
+function getScores() {
     let scores = [];
 
     if (existScores()) {
@@ -101,6 +102,10 @@ function showSpace(text) {
 }
 
 listen('click', scoreOpen, () => {
+    openModal();
+});
+
+listen('click', gameScoreOpen, () => {
     openModal();
 });
 

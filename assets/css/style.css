@@ -175,26 +175,49 @@ video {
     }
 }
 
-.info-open, .score-open {
+.info-open, 
+.score-open, 
+.game-info-open,
+.game-score-open {
     cursor: pointer;
     margin-top: 20px;
     color: var(--app-light-gray);
 }
 
-.info-open {
+.info-open,
+.game-info-open {
     font-size: 26px;
     margin-right: 15px;
 }
   
-.score-open {
+.score-open, 
+.game-score-open  {
     font-size: 22px;
     margin-left: 15px;
 }
 
-.info-open:hover, .score-open:hover {
+.info-open:hover, 
+.score-open:hover, 
+.game-info-open:hover, 
+.game-score-open:hover {
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     transform: scale(1.2);
     color: var(--app-white);
+}
+
+.game-info-open {
+    margin-right: 10px;
+    color: var(--app-white);
+}
+
+.game-score-open {
+    margin-left: 10px;
+    color: var(--app-white);
+}
+
+.i-disabled {
+    pointer-events: none;
+    opacity: 0.5;
 }
   
 .start {
