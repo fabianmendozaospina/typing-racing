@@ -1,7 +1,7 @@
 'use strict';
 
 import { select, listen, formatCounter, formatDate } from "./utils.js";
-//TODO: Use the class Score later:
+//TODO: Check possibility to use the class Score:
 //import Score from "./Score.js";
 
 const LS_SCORES = 'scores';
@@ -48,7 +48,7 @@ export function getScores() {
 export function saveScore(hits) {
     const date = new Date();
     
-    //TODO: Implement this later using the class Score:
+    //TODO: Check possibility to use the class Score:
     //scores.push(new Score(date, hits, percentage));
 
     let scores = getScores();
@@ -67,7 +67,7 @@ export function saveScore(hits) {
 function showScores() {
     if (!existScores()) {
         scoreTable.style.fontFamily = mainFont;
-        scoreTable.innerHTML = "There are no scores yet";
+        scoreTable.innerHTML = "<br>There are no scores yet";
         return;
     }
 
