@@ -373,13 +373,13 @@ input[type="text"]::placeholder {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
 
-  .open-modal-btn:hover {
+ .open-modal-btn:hover {
     background-color: #ff6347;
-  }
+ }
 
-  .modal-overlay {
+ .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -398,14 +398,14 @@ input[type="text"]::placeholder {
         height: 82%; 
         object-fit: cover;
     }    
-  }
+}
 
-  .modal-overlay.active {
+.modal-overlay.active {
     opacity: 1;
     visibility: visible;
-  }
+}
 
-  .modal {
+.modal {
     background-color: rgba(0, 0, 0, 0.99);
     width: 62px;
     height: 62px;
@@ -415,19 +415,48 @@ input[type="text"]::placeholder {
     align-items: center;
     transform: scale(0); 
     transition: transform 0.4s ease-in-out;
-  }
+}
 
-  .modal.active {
+.modal.active {
     transform: scale(10); 
-  }
+}
 
-  .modal-content {
+.modal-content {
     text-align: center;
     color: #fff;
     opacity: 0;
     transition: opacity 0.3s ease 0.4s;
-  }
 
-  .modal.active .modal-content {
+    video {
+        margin-top: 5px;
+    }
+}
+
+.modal.active .modal-content {
     opacity: 1;
-  }
+}
+
+.info-title {
+    p {
+        font-size: 4px;
+        margin-top: 7px;
+    }
+}
+
+.info-close {
+    margin-top: -13px;
+
+    i {
+        font-size: 4px;
+        color: var(--app-light-gray);
+    }
+}
+
+.info-close {
+    i:hover {
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        transform: scale(1.2);
+        color: var(--app-white);
+        cursor: pointer;
+    }
+}

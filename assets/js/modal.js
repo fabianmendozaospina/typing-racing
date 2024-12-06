@@ -3,26 +3,33 @@
 import { select, listen } from "./utils.js";
 
 const infoBtn = select('.info');
+const infoVideo = select('.info-video');
 const modalOverlay = select('.modal-overlay');
 const modal = select('.modal');
 const logo = select('.logo');
-const infoGame = select('.info-game');
+const closeBtn = select('.info-close');
 
 const closeModal = () => {
     modalOverlay.classList.remove('active');
     modal.classList.remove('active');
     logo.style.visibility = 'visible';
-    infoGame.pause();
+    infoVideo.pause();
 };
 
 listen('click', infoBtn, () => {
     modalOverlay.classList.add('active');
     modal.classList.add('active');
+
     setTimeout(() => {
         logo.style.visibility = 'hidden';
-    }, 300)
-    infoGame.currentTime = 0;
-    infoGame.play();
+    }, 300);
+
+    infoVideo.currentTime = 0;
+    infoVideo.play();
+});
+
+listen('click', closeBtn, () => {
+    closeModal();
 });
 
 listen('keydown', document, (event) => {
