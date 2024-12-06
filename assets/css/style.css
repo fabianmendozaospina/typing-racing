@@ -398,8 +398,8 @@ input[type="text"]::placeholder {
 
 .modal-info, .modal-score {
     background-color: rgba(0, 0, 0, 0.99);
-    width: 62px;
-    height: 62px;
+    width: 630px;
+    height: 630px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -409,7 +409,7 @@ input[type="text"]::placeholder {
 }
 
 .modal-info.active, .modal-score.active {
-    transform: scale(10); 
+    transform: scale(1); 
 }
 
 .modal-info-content, .modal-score-content {
@@ -433,16 +433,16 @@ input[type="text"]::placeholder {
 
 .info-title, .score-title {
     p {
-        font-size: 4px;
-        margin-top: 7px;
+        font-size: 36px;
+        margin-bottom: 40px;
     }
 }
 
 .info-close, .score-close {
-    margin-top: -13px;
+    margin-top: 90px;
 
     i {
-        font-size: 4px;
+        font-size: 34px;
         color: var(--app-light-gray);
     }
 }
@@ -457,25 +457,23 @@ input[type="text"]::placeholder {
 }
 
 .score-table {
-    height: 40px;
-    width: 40px;
     text-align: left;
-    margin-left: 12px;
 
     table {
-        tr {            
+        tr {     
             th, td {
-                line-height: 1; 
+                padding: 5px;
+
             }
-            
+
             th {
                 color: var(--app-red-light);
-                font-size: 1.5px;
+                font-size: 14px;
             }
             
             td {
                 color: var(--app-white);
-                font-size: 1.4px;
+                font-size: 14px;
                 border-bottom-width: 1px;
                 border-bottom-color: var(--app-dark-gray);                
             }
