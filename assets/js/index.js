@@ -99,7 +99,7 @@ function getWordToType() {
     const wordToShow = wordBank[wordToTypeIndex];
 
     if (wordToShow.length > 9)  {
-        outputObj.style.fontSize = '75px';
+        outputObj.style.fontSize = '77px';
     } else {
         outputObj.style.fontSize = '90px';
     }
