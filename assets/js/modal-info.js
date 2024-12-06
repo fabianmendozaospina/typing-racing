@@ -9,7 +9,7 @@ const modal = select('.modal-info');
 const logo = select('.logo');
 const infoClose = select('.info-close');
 
-const closeModal = () => {
+function closeModal () {
     modalOverlay.classList.remove('active');
     modal.classList.remove('active');
     logo.style.visibility = 'visible';

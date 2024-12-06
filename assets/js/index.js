@@ -1,10 +1,11 @@
 'use strict';
 
-import { select, listen } from "./utils.js";
+import { select, listen, formatCounter } from "./utils.js";
 import data from "../data/word-bank.js";
-import Score from "./Score.js";
+import { openModal, closeModal, existScores, 
+         getScores, saveScore } from "./modal-score.js";
 
-const TOTAL_SECONDS = 99;
+const TOTAL_SECONDS = 15;
 const containerIntroObj = select('.container-intro');
 const containerGameObj = select('.container-game');
 const gameControlsObj = select('.game-controls');
@@ -16,7 +17,6 @@ const hitsObj = select('.hits');
 const startObj = select('.start');
 const restartObj = select('.restart');
 const gameCounterObj = select('.racing-counter');
-const scores = [];
 
 let wordBank = data;
 let wordToType = '';
@@ -74,7 +74,7 @@ function start() {
         if (counter === 0) {
             outputObj.innerText = 'Game Over!';
             stop(false);
-            createScore();
+            saveScore(hits);
         }
     }, 1000);
 }
@@ -88,7 +88,8 @@ function stop(hideOutput = true) {
     gameAudioObj.currentTime = 0;
 
     containerIntroObj.style.display = 'none';
-    if (hideOutput) gameControlsObj.style.visibility = 'hidden';
+    //OJO if (hideOutput) 
+    gameControlsObj.style.visibility = hideOutput ? 'hidden' : 'none';
     inputObj.style.visibility = 'hidden';
     containerGameObj.style.display = 'block';
 }
@@ -109,7 +110,6 @@ function getWordToType() {
         outputObj.style.fontSize = '88px';
     }
 
-    //BEFORE: outputObj.innerText = wordToType;
     outputObj.innerHTML = [...wordToType]
         .map(letter => `<span class="letter">${letter}</span>`)
         .join('');
@@ -128,16 +128,6 @@ function areWordsIquals(input, wordToType) {
     }
 
     return false;
-}
-
-function createScore() {
-    const date = new Date();
-    const percentage = 0;
-    scores.push(new Score(date, hits, percentage));
-}
-
-function formatCounter(counter) {
-    return (counter < 10 ? '0' : '') + `${counter}`;
 }
 
 function applyEffect(input, wordToType) {
@@ -164,8 +154,7 @@ listen('input', inputObj, () => {
     if (areWordsIquals(input, wordToType)) {
         hits++;
         console.log(" wordBank.length", wordBank.length)
-        const percentage = (hits * 100) / wordBank.length;
-        hitsObj.innerText = `${hits} hit${hits === 1 ? '' : 's'}\n${percentage}%\n`;
+        hitsObj.innerText = `${hits} hit${hits === 1 ? '' : 's'}`;
 
         if (wordToTypeIndex < wordBank.length) {
             wordToType = getWordToType();
@@ -173,7 +162,7 @@ listen('input', inputObj, () => {
         } else {
             outputObj.innerText = 'Congrats!!';
             stop(false);
-            createScore();
+            saveScore(hits);
         }
     }
 });

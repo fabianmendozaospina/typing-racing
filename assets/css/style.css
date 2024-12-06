@@ -1,11 +1,14 @@
 @charset "utf=8";
 
 :root {
-    --app-counter-font: monospace;
+    --app-main-font: 'Poppins', 'Open Sans', Arial, sans-serif;
+    --app-monospace-font: monospace;
     --app-body-bg: #0b0b0b;
     --app-dark-gray: #303030;
     --app-light-gray: #3d4851;
     --app-white: #fff;
+    --app-red-dark: rgba(255, 6, 6, 0.5);
+    --app-red-light: rgba(250, 6, 6, 0.9);
 }
 
 
@@ -27,7 +30,7 @@ html {
 }
 
 body {
-    font-family: 'Poppins', 'Open Sans', Arial, sans-serif;
+    font-family: var(--app-main-font);
     font-weight: 400;
     text-rendering: geometricPrecision;
     background-color: var(--app-body-bg);
@@ -142,7 +145,7 @@ video {
     margin-top: 0;
     position: absolute;
     animation: move 0.6s linear forwards; 
-    background: linear-gradient(45deg, #ff4500, rgba(250, 6, 6, 0.9), rgba(250, 6, 6, 0.9));  
+    background: linear-gradient(45deg, var(--app-red-dark), var(--app-red-light), var(--app-red-light));  
 }
 
 @keyframes typing {
@@ -200,7 +203,7 @@ video {
     border-radius: 50%; 
     font-size: 20px;
     font-weight: 500;
-    background-color: rgba(255, 6, 6, 0.5); 
+    background-color: var(--app-red-dark); 
     color: #fff;
     border: none;
     cursor: pointer;
@@ -208,7 +211,7 @@ video {
 }
 
 .start:hover {
-    background-color:  rgba(250, 6, 6, 0.9);
+    background-color:  var(--app-red-light);
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     transform: scale(1.2);
@@ -270,7 +273,7 @@ video {
 }
 
 .restart:hover {
-    background-color:  rgba(250, 6, 6, 0.9);
+    background-color:  var(--app-red-light);
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); 
 }
 
@@ -302,10 +305,7 @@ form {
     font-weight: 800;
     font-size: 88px;
     margin: 0;
-
-    /* font-size: 2rem; */
     letter-spacing: 5px;
-    /* margin-bottom: 20px; */
     white-space: nowrap;
     overflow: hidden;    
 }
@@ -342,7 +342,7 @@ input[type="text"]::placeholder {
 }
 
 .counter, .hits {
-    font-family: var(--app-counter-font);
+    font-family: var(--app-monospace-font);
 }
 
 .counter {
@@ -369,21 +369,6 @@ input[type="text"]::placeholder {
 /* ------------------------*/
 /*          Modal          */
 /* ------------------------*/
-
-/* .open-modal-info-open {
-    padding: 10px 20px;
-    background-color: #ff4500;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
- .open-modal-info-open:hover {
-    background-color: #ff6347;
- } */
 
  .modal-info-container, .modal-score-container {
     position: fixed;
@@ -474,6 +459,28 @@ input[type="text"]::placeholder {
 .score-table {
     height: 40px;
     width: 40px;
+    text-align: left;
+    margin-left: 12px;
+
+    table {
+        tr {            
+            th, td {
+                line-height: 1; 
+            }
+            
+            th {
+                color: var(--app-red-light);
+                font-size: 1.5px;
+            }
+            
+            td {
+                color: var(--app-white);
+                font-size: 1.4px;
+                border-bottom-width: 1px;
+                border-bottom-color: var(--app-dark-gray);                
+            }
+        }
+    }
 }
 
 /* ------------------------*/
