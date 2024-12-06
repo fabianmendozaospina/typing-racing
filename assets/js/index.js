@@ -44,15 +44,15 @@ function play() {
 
     setTimeout(() => {
         gameVideoObj.play();
-        gameAudioObj.play(); 
+        gameAudioObj.play();
     }, 1000);
 
-    setTimeout(() => {    
+    setTimeout(() => {
         containerIntroObj.style.display = 'none';
         gameControlsObj.style.visibility = 'visible';
-        start();        
+        start();
 
-    }, 4100);  
+    }, 4100);
 }
 
 function start() {
@@ -84,8 +84,8 @@ function stop(hideOutput = true) {
 
     gameVideoObj.pause();
     gameAudioObj.pause();
-    gameVideoObj.currentTime = 0;    
-    gameAudioObj.currentTime = 0;    
+    gameVideoObj.currentTime = 0;
+    gameAudioObj.currentTime = 0;
 
     containerIntroObj.style.display = 'none';
     if (hideOutput) gameControlsObj.style.visibility = 'hidden';
@@ -103,16 +103,16 @@ function getWordToType() {
 
     const wordToType = wordBank[wordToTypeIndex];
 
-    if (wordToType.length > 9)  {
+    if (wordToType.length > 9) {
         outputObj.style.fontSize = '77px';
     } else {
         outputObj.style.fontSize = '90px';
     }
 
     //BEFORE: outputObj.innerText = wordToType;
-    outputObj.innerHTML =  [...wordToType]
-    .map(letter => `<span class="letter">${letter}</span>`)
-    .join('');
+    outputObj.innerHTML = [...wordToType]
+        .map(letter => `<span class="letter">${letter}</span>`)
+        .join('');
 
     letterElements = document.querySelectorAll('.letter');
 
@@ -125,42 +125,45 @@ function areWordsIquals(input, wordToType) {
         inputObj.value = '';
 
         return true;
-    } 
-    
+    }
+
     return false;
 }
 
 function createScore() {
     const date = new Date();
     const percentage = 0;
-    scores.push(new Score(date, hits, percentage));    
+    scores.push(new Score(date, hits, percentage));
 }
 
 function formatCounter(counter) {
     return (counter < 10 ? '0' : '') + `${counter}`;
 }
 
-function applyEffect(index, input, wordToType){
-    if (index >= 0 && input[index] === wordToType[index]) {
-        const letter = letterElements[index];
+function applyEffect(input, wordToType) {
+    for (let i = 0; i < input.length; i++) {
+        if (input[i] === wordToType[i] && 
+            !animatedLetters.includes(i) && 
+            input.slice(0, i) === wordToType.slice(0, i)) {
+            const letter = letterElements[i];
 
-        if (letter && !animatedLetters.includes(index)) {
-          letter.style.transform = 'translateX(-300px)';
-          letter.style.opacity = '0';
-          animatedLetters.push(index);
+            if (letter) {
+                letter.style.transform = 'translateX(-300px)';
+                letter.style.opacity = '0';
+                animatedLetters.push(i);
+            }
         }
-    }  
+    }
 }
 
 listen('input', inputObj, () => {
     const input = inputObj.value.trim();
-    const index = input.length - 1;
 
-    applyEffect(index, input, wordToType);
+    applyEffect(input, wordToType);
 
     if (areWordsIquals(input, wordToType)) {
         hits++;
-        hitsObj.innerText = `Hits: ${formatCounter(hits)}\nPerc: 0%\n` ;
+        hitsObj.innerText = `Hits: ${formatCounter(hits)}\nPerc: 0%\n`;
 
         if (wordToTypeIndex < wordBank.length) {
             wordToType = getWordToType();
