@@ -1,0 +1,19 @@
+{
+  "name": "typing-racing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "keywords": [
+    "HTML",
+    "CSS",
+    "JAVASCRIPT"
+  ],
+  "author": "Fabian Mendoza",
+  "license": "ISC",
+  "description": "Typing Racing Video Game",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
