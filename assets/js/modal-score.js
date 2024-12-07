@@ -75,10 +75,13 @@ function showScores() {
 
     scoreTable.style.fontFamily = monospaceFont;
     const scores = getScores();
-    let table = `<table><th>Pos.</th>
+    let table = `<table>
+                    <tr>
+                        <th>Pos.</th>
                         <th>Hits</th>
                         <th>Perc.</th>
-                        <th>Date</th>`;
+                        <th>Date</th>
+                    </tr>`;
     
     for (let i = 0; i < scores.length; i++) {
         const score = scores[i];
@@ -87,10 +90,12 @@ function showScores() {
         const percentage = formatPercentage(score.percentage);
         const date = formatDate(score.date);
         
-        table = table + `<tr><td>#${position}</td>
-                             <td>${hits}</td>
-                             <td>${percentage}</td>
-                             <td>${date}</td></tr>`;
+        table = table + `<tr>
+                            <td>#${position}</td>
+                            <td>${hits}</td>
+                            <td>${percentage}</td>
+                            <td>${date}</td>
+                        </tr>`;
     }
 
     table = table + '</table>';
