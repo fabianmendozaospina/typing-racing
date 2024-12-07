@@ -9,6 +9,9 @@
     --app-white: #fff;
     --app-red-dark: rgba(255, 6, 6, 0.5);
     --app-red-light: rgba(250, 6, 6, 0.9);
+    --app-output-font-size-big: 84px;
+    --app-output-font-size-small: 64px;
+    --app-input-font-size: 45px;
 }
 
 
@@ -326,7 +329,7 @@ form {
 
 .output {
     font-weight: 800;
-    font-size: 88px;
+    font-size: var(--app-output-font-size-big);
     margin: 0;
     letter-spacing: 5px;
     white-space: nowrap;
@@ -352,7 +355,7 @@ input[type="text"] {
     width: 100%;
     height: 140px;
     padding: 10px;
-    font-size: 45px;
+    font-size: var(--app-input-font-size);
     font-weight: 800;
     border-radius: 5px;
     margin-bottom: 40px;

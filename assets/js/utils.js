@@ -1,5 +1,12 @@
 'use strict';
 
+const rootStyles = getComputedStyle(document.documentElement);
+export const mainFont = rootStyles.getPropertyValue('--app-main-font').trim();
+export const monospaceFont = rootStyles.getPropertyValue('--app-monospace-font').trim();
+export const outputFontBig = rootStyles.getPropertyValue('--app-output-font-size-big').trim();
+export const outputFontSmall = rootStyles.getPropertyValue('--app-output-font-size-small').trim();
+
+
 export function select(selector, scope = document) {
     return scope.querySelector(selector);
 }

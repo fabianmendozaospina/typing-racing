@@ -1,10 +1,10 @@
 'use strict';
 
-import { select, listen, formatCounter } from "./utils.js";
+import { select, listen, formatCounter, outputFontBig, outputFontSmall } from "./utils.js";
 import data from "../data/word-bank.js";
 import { saveScore } from "./modal-score.js";
 
-const TOTAL_SECONDS = 15;
+const TOTAL_SECONDS = 20;
 const containerIntroObj = select('.container-intro');
 const containerGameObj = select('.container-game');
 const gameControlsObj = select('.game-controls');
@@ -108,9 +108,9 @@ function getWordToType() {
     const wordToType = wordBank[wordToTypeIndex];
 
     if (wordToType.length > 9) {
-        outputObj.style.fontSize = '75px';
+        outputObj.style.fontSize = outputFontSmall;
     } else {
-        outputObj.style.fontSize = '88px';
+        outputObj.style.fontSize = outputFontBig;
     }
 
     outputObj.innerHTML = [...wordToType]

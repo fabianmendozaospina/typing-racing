@@ -1,6 +1,7 @@
 'use strict';
 
-import { select, listen, formatCounter, formatDate, formatPercentage } from "./utils.js";
+import { select, listen, formatCounter, formatDate, 
+         formatPercentage, mainFont, monospaceFont } from "./utils.js";
 //TODO: Check possibility to use the class Score:
 //import Score from "./Score.js";
 
@@ -12,9 +13,6 @@ const logo = select('.logo');
 const scoreClose = select('.score-close');
 const scoreTable = select('.score-table');
 const gameScoreOpen = select('.game-score-open');
-const rootStyles = getComputedStyle(document.documentElement);
-const mainFont = rootStyles.getPropertyValue('--app-main-font').trim();
-const monospaceFont = rootStyles.getPropertyValue('--app-monospace-font').trim();
 
 function openModal() {
     modalOverlay.classList.add('active');
