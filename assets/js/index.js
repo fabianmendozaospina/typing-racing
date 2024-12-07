@@ -1,6 +1,6 @@
 'use strict';
 
-import { select, listen, formatCounter, outputFontBig, outputFontSmall } from "./utils.js";
+import { select, listen, formatCounter } from "./utils.js";
 import data from "../data/word-bank.js";
 import { saveScore } from "./modal-score.js";
 
@@ -106,13 +106,6 @@ function getWordToType() {
     animatedLetters = [];
 
     const wordToType = wordBank[wordToTypeIndex];
-
-    if (wordToType.length > 9) {
-        outputObj.style.fontSize = outputFontSmall;
-    } else {
-        outputObj.style.fontSize = outputFontBig;
-    }
-
     outputObj.innerHTML = [...wordToType]
         .map(letter => `<span class="letter">${letter}</span>`)
         .join('');
@@ -167,7 +160,7 @@ listen('input', inputObj, () => {
     if (areWordsIquals(input, wordToType)) {
         hits++;
         percentage = (hits * 100) / wordBank.length;
-        hitsObj.innerText = `${hits} hit${hits === 1 ? '' : 's'}\n${percentage.toFixed(1)}%`;
+        hitsObj.innerText = `${hits} hit${hits === 1 ? '' : 's'}\n `;
 
         if (wordToTypeIndex < wordBank.length) {
             wordToType = getWordToType();
