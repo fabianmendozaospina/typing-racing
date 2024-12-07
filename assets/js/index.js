@@ -1,6 +1,6 @@
 'use strict';
 
-import { select, listen, formatCounter } from "./utils.js";
+import { select, selectAll, listen, formatCounter } from "./utils.js";
 import data from "../data/word-bank.js";
 import { saveScore } from "./modal-score.js";
 
@@ -110,7 +110,7 @@ function getWordToType() {
         .map(letter => `<span class="letter">${letter}</span>`)
         .join('');
 
-    letterElements = document.querySelectorAll('.letter');
+    letterElements = selectAll('.letter');
 
     return wordToType;
 }
