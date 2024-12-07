@@ -398,6 +398,10 @@ input[type="text"]::placeholder {
     }    
 }
 
+.info-video-container {
+    margin-top: 50px;
+}
+
 .modal-info-container.active, .modal-score-container.active {
     opacity: 1;
     visibility: visible;
