@@ -67,14 +67,15 @@ export function saveScore(hits, percentage) {
 }
 
 function showScores() {
-    if (!existScores()) {
+    const scores = getScores();
+
+    if (scores.length === 0) {
         scoreTable.style.fontFamily = mainFont;
         scoreTable.innerHTML = "<br>There are no scores yet";
         return;
     }
 
     scoreTable.style.fontFamily = monospaceFont;
-    const scores = getScores();
     let table = `<table>
                     <tr>
                         <th>Pos.</th>
