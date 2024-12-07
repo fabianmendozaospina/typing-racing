@@ -20,6 +20,17 @@ export function formatCounter(counter, symbol = '0') {
     return (counter < 10 ? symbol : '') + `${counter}`;
 }
 
+export function formatPercentage(input) {
+    let value = input.toString();
+    const sep = value.indexOf(',') > -1 ? ',' : '.';
+
+    if (isInteger(value)) {
+        value = value + '.0'
+    }
+
+    return value + '0'.repeat(5 - value.length) + '%';
+}
+
 export function formatDate(input) {
     let date;
 
@@ -34,4 +45,9 @@ export function formatDate(input) {
     });
 
     return formattedDate;
+}
+
+function isInteger(value) {
+    const regex = /^-?\d+$/;
+    return regex.test(value);
 }

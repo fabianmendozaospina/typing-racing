@@ -24,6 +24,7 @@ let wordToType = '';
 let wordToTypeIndex = 0;
 let intervalId = null;
 let hits = 0;
+let percentage = 0;
 let letterElements = [];
 let animatedLetters = [];
 
@@ -76,7 +77,7 @@ function start() {
         if (counter === 0) {
             outputObj.innerText = 'Game Over!';
             stop(false);
-            saveScore(hits);
+            saveScore(hits, percentage);
             disableButtons(false);
         }
     }, 1000);
@@ -165,8 +166,8 @@ listen('input', inputObj, () => {
 
     if (areWordsIquals(input, wordToType)) {
         hits++;
-        console.log(" wordBank.length", wordBank.length)
-        hitsObj.innerText = `${hits} hit${hits === 1 ? '' : 's'}`;
+        percentage = (hits * 100) / wordBank.length;
+        hitsObj.innerText = `${hits} hit${hits === 1 ? '' : 's'}\n${percentage.toFixed(1)}%`;
 
         if (wordToTypeIndex < wordBank.length) {
             wordToType = getWordToType();
@@ -174,7 +175,7 @@ listen('input', inputObj, () => {
         } else {
             outputObj.innerText = 'Congrats!!';
             stop(false);
-            saveScore(hits);
+            saveScore(hits, percentage);
             disableButtons(false);
         }
     }

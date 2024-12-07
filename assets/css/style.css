@@ -499,14 +499,24 @@ input[type="text"]::placeholder {
             th {
                 color: var(--app-red-light);
                 font-size: 14px;
+                width: 10px;
             }
             
             td {
                 color: var(--app-white);
                 font-size: 14px;
                 border-bottom-width: 1px;
-                border-bottom-color: var(--app-dark-gray);                
+                border-bottom-color: var(--app-dark-gray);
+                width: 45px;             
             }
+            
+            td:nth-last-child(2) {
+                width: 110px;
+            }
+
+            td:last-child {
+                width: 280px; 
+            }     
         }
     }
 }

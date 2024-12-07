@@ -1,6 +1,6 @@
 'use strict';
 
-import { select, listen, formatCounter, formatDate } from "./utils.js";
+import { select, listen, formatCounter, formatDate, formatPercentage } from "./utils.js";
 //TODO: Check possibility to use the class Score:
 //import Score from "./Score.js";
 
@@ -46,7 +46,7 @@ function getScores() {
     return scores;
 }
 
-export function saveScore(hits) {
+export function saveScore(hits, percentage) {
     const date = new Date();
     
     //TODO: Check possibility to use the class Score:
@@ -55,6 +55,7 @@ export function saveScore(hits) {
     let scores = getScores();
     const newScore = {
         hits,
+        percentage,
         date
     };
 
@@ -74,31 +75,26 @@ function showScores() {
 
     scoreTable.style.fontFamily = monospaceFont;
     const scores = getScores();
-    const titlePosition = 'Pos.';
-    const titleHits = 'Hits';
-    const titleDate = 'Date';
-    let table = `<table><th>${titlePosition}${showSpace(titlePosition)}</th><th>${titleHits}${showSpace(titleHits)}</th><th>${titleDate}</th>`;
+    let table = `<table><th>Pos.</th>
+                        <th>Hits</th>
+                        <th>Perc.</th>
+                        <th>Date</th>`;
     
     for (let i = 0; i < scores.length; i++) {
         const score = scores[i];
         const position = formatCounter(i + 1, ' ');
         const hits = formatCounter(score.hits);
+        const percentage = formatPercentage(score.percentage);
         const date = formatDate(score.date);
-
-        table = table + `<tr><td>#${position}${showSpace(position)}</td><td>${hits}${showSpace(hits)}</td><td>${date}</td></tr>`;
+        
+        table = table + `<tr><td>#${position}</td>
+                             <td>${hits}</td>
+                             <td>${percentage}</td>
+                             <td>${date}</td></tr>`;
     }
 
     table = table + '</table>';
     scoreTable.innerHTML = table;    
-}
-
-function showSpace(text) {
-    const totalChars = 7;
-    const lengthText = text.length;
-    const space = totalChars - lengthText;
-    console.log("text.length", text.length)
-
-    return ' '.repeat(space);
 }
 
 listen('click', scoreOpen, () => {
