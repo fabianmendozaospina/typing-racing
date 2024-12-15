@@ -4,7 +4,7 @@ import { select, selectAll, listen, formatCounter } from "./utils.js";
 import data from "../data/word-bank.js";
 import { saveScore } from "./modal-score.js";
 
-const TOTAL_SECONDS = 20;
+const TOTAL_SECONDS = 99;
 const containerIntroObj = select('.container-intro');
 const containerGameObj = select('.container-game');
 const gameControlsObj = select('.game-controls');
