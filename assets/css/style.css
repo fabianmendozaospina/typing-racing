@@ -468,7 +468,7 @@ input[type="text"]::placeholder {
 }
 
 .score-table {
-    width: 300px;
+    width: 310px;
     height: 300px;
     display: flex;
     justify-content: center;
