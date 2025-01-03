@@ -285,14 +285,17 @@ video {
 }
 
 .panel {
-    width: 650px;
+    width: 780px;
     border-radius: 5px;
     padding: 15px;
 }
 
 .output-container {
+    display: flex;
+    justify-content: center;
     padding: 20px;
     border-radius: 5px;
+    width: 100%;
 }
 
 .output {
@@ -302,6 +305,7 @@ video {
     letter-spacing: 5px;
     white-space: nowrap;
     overflow: hidden;    
+    display: inline-block; 
 }
 
 input[type="text"] {
@@ -309,7 +313,7 @@ input[type="text"] {
     color: #94acb5;
     border: 1px solid rgba(24, 23, 23, 0.6);
     text-align: center;
-    width: 100%;
+    width: 85%;
     height: 140px;
     padding: 10px;
     font-size: var(--app-input-font-size);
